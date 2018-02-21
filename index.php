@@ -10,18 +10,20 @@
     $lastFloor = $_POST["last_floor"];
     $doorOpen = $_POST["door_open"];
 
-    fwrite($modelFile, $direction . "\n");
-    fwrite($modelFile, $moving . "\n");
-    fwrite($modelFile, $currentFloor . "\n");
-    fwrite($modelFile, $lastFloor . "\n");
-    fwrite($modelFile, $doorOpen . "\n");
+    fwrite($modelFile, "direction" . "," . $direction . "\n");
+    fwrite($modelFile, "moving" . "," . $moving . "\n");
+    fwrite($modelFile, "current_floor" . "," . $currentFloor . "\n");
+    fwrite($modelFile, "last_floor" . "," . $lastFloor . "\n");
+    fwrite($modelFile, "door_open" . "," . $doorOpen . "\n");
 
     fclose($modelFile);
   } else {
     // Read and echo data
+    $data = [];
     $modelFile = fopen("model", "r");
     while (($line = fgets($modelFile)) !== false) {
-      echo $line;
+      $data[explode(",", $line)[0]] = explode(",", $line)[1];
     }
+    echo json_encode($data);
     fclose($modelFile);
   }
