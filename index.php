@@ -22,7 +22,7 @@
     $data = [];
     $modelFile = fopen("model", "r");
     while (($line = fgets($modelFile)) !== false) {
-      $data[explode(",", $line)[0]] = explode(",", $line)[1];
+      $data[explode(",", $line)[0]] = intval(explode(",", $line)[1]);
     }
     echo json_encode($data);
     fclose($modelFile);
