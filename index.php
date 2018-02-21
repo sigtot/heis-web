@@ -1,8 +1,7 @@
 <?php
-  $modelFile = fopen("model", "w");
-
-  // Write data if it exists
   if (!empty($_POST)) {
+    // Write data if it exists
+    $modelFile = fopen("model", "w");
     $direction = $_POST["direction"];
     $moving = $_POST["moving"];
     $currentFloor = $_POST["current_floor"];
@@ -14,9 +13,13 @@
     fwrite($modelFile, $currentFloor . "\n");
     fwrite($modelFile, $lastFloor . "\n");
     fwrite($modelFile, $doorOpen . "\n");
-  }
 
-  // Read and echo data in $modelFile
-  while (($line = fgets($modelFile)) !== false) {
-    echo $line;
+    fclose($modelFile);
+  } else {
+    // Read and echo data
+    $modelFile = fopen("model", "r");
+    while (($line = fgets($modelFile)) !== false) {
+      echo $line;
+    }
+    fclose($modelFile);
   }
