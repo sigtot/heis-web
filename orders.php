@@ -11,5 +11,6 @@ if (!empty($_POST)) {
   fclose($ordersFile);
 } else {
   // Read and echo data
+  echo file_get_contents($ordersFileName);
 }
 
